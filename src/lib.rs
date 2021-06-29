@@ -30,9 +30,11 @@ impl From<&str> for SortBy {
 
 #[cfg(test)]
 mod tests {
+    use super::*;
+
     #[test]
     fn it_works() {
         let x: SortBy = dbg!(serde_json::from_str("\"order\"")).unwrap();
-        assert_eq(x, SortBy::Order);
+        assert_eq!(x, SortBy::Order);
     }
 }
