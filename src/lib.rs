@@ -33,7 +33,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn it_works() {
+    fn smoke() {
         let x: SortBy = dbg!(serde_json::from_str("\"order\"")).unwrap();
         assert_eq!(x, SortBy::Order);
     }
