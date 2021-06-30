@@ -32,7 +32,7 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: ${{ runner.os }}-cargo-
       - name: Tree
-        run: tree target
+        run: tree -a target
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
@@ -58,10 +58,10 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: ${{ runner.os }}-cargo-
       - name: Tree
-        run: tree target
+        run: tree -a target
       - run: rustup component add clippy
       - name: Clippy
-        run: CARGO_LOG=cargo::core::compiler::fingerprint=info cargo clippy --workspace --all-targets --tests --verbose
+        run: CARGO_LOG=cargo::core::compiler::fingerprint=info cargo clippy --workspace --all-targets --tests -vvv
       # - name: Tree2
       #   run: tree target
       - name: Clippy2
