@@ -35,23 +35,24 @@ jobs:
       - uses: actions-rs/cargo@v1
         with:
           command: test
-          args: --all-features
+          args: --workspace --all-features
 
-  # clippy:
-  #   name: "Clippy"
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: "Cache cargo registry/index/build"
-  #       uses: actions/cache@v2
-  #       with:
-  #         path: |
-  #           ~/.cargo/registry
-  #           ~/.cargo/git
-  #           target
-  #         key: ${{ runner.os }}-${{ hashFiles('**/Cargo.lock') }}
-  #     - run: rustup component add clippy
-  #     - run: cargo clippy --workspace --all-targets --tests
+  clippy:
+    name: "Clippy"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: "Cache cargo registry/index/build"
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: ${{ runner.os }}-cargo-
+      - run: rustup component add clippy
+      - run: cargo clippy --workspace --all-targets --tests
 
   # fmt:
   #   name: "Format"
