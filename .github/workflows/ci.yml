@@ -52,7 +52,10 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: ${{ runner.os }}-cargo-
       - run: rustup component add clippy
-      - run: cargo clippy --workspace --all-targets --tests
+      - uses: actions-rs/cargo@v1
+        with:
+          command: clippy
+          args: --workspace --all-features --tests
 
   # fmt:
   #   name: "Format"
