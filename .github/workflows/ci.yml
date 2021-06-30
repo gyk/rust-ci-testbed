@@ -60,12 +60,12 @@ jobs:
       - name: Tree
         run: tree target
       - run: rustup component add clippy
-      - uses: actions-rs/cargo@v1
-        with:
-          command: clippy
-          args: --workspace --all-features --tests --verbose
-      - name: Tree2
-        run: tree target
+      - name: Clippy
+        run: CARGO_LOG=cargo::core::compiler::fingerprint=info cargo clippy --workspace --all-targets --tests --verbose
+      # - name: Tree2
+      #   run: tree target
+      - name: Clippy2
+        run: CARGO_LOG=cargo::core::compiler::fingerprint=info cargo clippy --workspace --all-targets --tests --verbose
 
   # fmt:
   #   name: "Format"
