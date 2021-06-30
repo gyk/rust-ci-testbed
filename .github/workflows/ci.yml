@@ -55,17 +55,17 @@ jobs:
             ~/.cargo/registry
             ~/.cargo/git
             target
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-          restore-keys: ${{ runner.os }}-cargo-
+          key: ${{ runner.os }}-clippy-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: ${{ runner.os }}-clippy-
       - name: Tree
         run: tree -a target
       - run: rustup component add clippy
       - name: Clippy
-        run: CARGO_LOG=cargo::core::compiler::fingerprint=info cargo clippy --workspace --all-targets --tests -vvv
+        run: CARGO_LOG=cargo::core::compiler::fingerprint=info cargo clippy --workspace --tests -vvv
       # - name: Tree2
       #   run: tree target
       - name: Clippy2
-        run: CARGO_LOG=cargo::core::compiler::fingerprint=info cargo clippy --workspace --all-targets --tests --verbose
+        run: CARGO_LOG=cargo::core::compiler::fingerprint=info cargo clippy --workspace --tests --verbose
 
   # fmt:
   #   name: "Format"
