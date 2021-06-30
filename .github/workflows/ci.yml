@@ -39,7 +39,7 @@ jobs:
       - uses: actions-rs/cargo@v1
         with:
           command: test
-          args: --workspace --all-features
+          args: --workspace --all-features --verbose
 
   clippy:
     name: "Clippy"
@@ -63,7 +63,9 @@ jobs:
       - uses: actions-rs/cargo@v1
         with:
           command: clippy
-          args: --workspace --all-features --tests
+          args: --workspace --all-features --tests --verbose
+      - name: Tree2
+        run: tree target
 
   # fmt:
   #   name: "Format"
